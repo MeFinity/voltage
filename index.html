@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Voltage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js"></script>
+    <style>
+    body {
+        font-family: "Roboto", sans-serif;
+        background-color: #222;
+        color: white;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 1.5rem 0;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        font-weight: bold;
+        margin: 1.25rem 0;
+    }
+
+    #input-section {
+        margin-bottom: 2rem;
+    }
+
+    #input-textbox {
+        width: 90%;
+        padding: 0.75rem;
+        border: 1px solid #555;
+        border-radius: 4px;
+        resize: vertical;
+        background-color: #111;
+        color: white;
+    }
+
+    #color-textbox {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background-color: #111;
+        color: white;
+    }
+
+    #katex-section {
+        margin-bottom: 2rem;
+    }
+
+    #katex-code {
+        background-color: #666;
+        padding: 1rem;
+        overflow-x: auto;
+        border-radius: 4px;
+    }
+
+    #katex-output {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #333;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+
+<body>
+
+    <h1>Make those cool text on revolt easily with this site</h1>
+    <h2>nowhere from done + bad code sooo im marking this a proof of concept :3</h2>
+    <!-- dumpster fire code hell yeah -->
+
+    <div id="input-section">
+        <h2>Input</h2>
+        <textarea id="input-textbox" rows="4" cols="50" oninput="renderKatex()"></textarea><br>
+        <label for="color-textbox">Color:</label>
+        <input type="text" id="color-textbox" oninput="applyColor()">
+    </div>
+
+    <div id="katex-section">
+        <h2>KaTeX Code</h2>
+        <pre id="katex-code"></pre>
+        <h2>Output</h2>
+        <div id="katex-output"></div>
+    </div>
+
+    <script>
+function renderKatex() {
+    var inputText = document.getElementById("input-textbox").value.replace(/\\/g, '\\\\');
+    var katexCodeElement = document.getElementById("katex-code");
+    var katexOutputElement = document.getElementById("katex-output");
+    var colorTextbox = document.getElementById("color-textbox");
+
+    katexOutputElement.textContent = inputText;
+    katexCodeElement.textContent = "$\\color{#" + colorTextbox.value + "}\\textsf{" + katexOutputElement.textContent + "}$";
+
+    katex.render(inputText, katexOutputElement);
+}
+
+function applyColor() {
+    var colorTextbox = document.getElementById("color-textbox");
+    var color = "#" + colorTextbox.value;
+
+    var katexOutputElement = document.getElementById("katex-output");
+    katexOutputElement.style.color = color;
+}
+    </script>
+</body>
+
+</html>
